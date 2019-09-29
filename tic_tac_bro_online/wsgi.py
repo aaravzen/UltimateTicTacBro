@@ -1,5 +1,5 @@
 """
-WSGI config for TicTacBroOnline project.
+WSGI config for tic_tac_bro_online project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TicTacBroOnline.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tic_tac_bro_online.settings')
 
 application = get_wsgi_application()

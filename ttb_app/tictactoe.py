@@ -41,6 +41,8 @@ class UltimateTicTacToe:
         return self.space == -1 or self.big_board[self.space] != Token.NONE
 
     def select_board(self, space):
+        if self.needs_board():
+            raise UTTTError("You shouldn't need to select a board right now")
         if space < 0 or space > 8:
             raise UTTTError("That space ain't in bounds.")
         if self.big_board[space] != Token.NONE:
