@@ -62,4 +62,4 @@ target/
 # VS Code
 .vscode/
 
-.sqlite3
+*.sqlite3
