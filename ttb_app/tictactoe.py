@@ -1,5 +1,6 @@
 from enum import IntEnum
 import copy
+import random
 
 class Token(IntEnum):
     NONE = 0
@@ -26,6 +27,11 @@ class UltimateTicTacToe:
         self.winner = Token.NONE
         self.space = -1
     
+    def random_move(self):
+        if self.needs_board():
+            self.select_board(random.randint(0, 8))
+        self.place(random.randint(0, 8))
+    
     def game_over(self):
         return self.winner != Token.NONE
     
@@ -41,7 +47,7 @@ class UltimateTicTacToe:
         return self.space == -1 or self.big_board[self.space] != Token.NONE
 
     def select_board(self, space):
-        if self.needs_board():
+        if not self.needs_board():
             raise UTTTError("You shouldn't need to select a board right now")
         if space < 0 or space > 8:
             raise UTTTError("That space ain't in bounds.")
@@ -50,6 +56,8 @@ class UltimateTicTacToe:
         self.space = space
     
     def place(self, space):
+        if self.needs_board():
+            raise UTTTError("You can't place without a board")
         bx = self.space // 3
         by = self.space % 3
         lx = space // 3
@@ -108,7 +116,6 @@ class UltimateTicTacToe:
             raise UTTTError("Gotta set a board first bud.")
         if bx < 0 or bx > 2 or by < 0 or by > 2 or lx < 0 or lx > 2 or ly < 0 or ly > 2:
             raise UTTTError("Not a valid spot. All values gotta be between 0 and 2 inclusive.")
-        print(bx*3+by)
         if self.big_board[bx*3+by] != Token.NONE:
             raise UTTTError("That little board has already been won.")
         if self.little_boards[bx*3+by][lx*3+ly] != Token.NONE:
