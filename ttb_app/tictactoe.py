@@ -28,9 +28,15 @@ class UltimateTicTacToe:
         self.space = -1
     
     def random_move(self):
-        if self.needs_board():
-            self.select_board(random.randint(0, 8))
-        self.place(random.randint(0, 8))
+        retry = True
+        while retry:
+            try:
+                if self.needs_board():
+                    self.select_board(random.randint(0, 8))
+                self.place(random.randint(0, 8))
+                retry = False
+            except UTTTError:
+                pass
     
     def get_board_tuples(self):
         return zip(self.big_board, self.little_boards)

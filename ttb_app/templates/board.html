@@ -14,17 +14,28 @@
   <div class="row">
   {% endif %}
     <div class="col-4">
-    {% if needs_board %}
+    {% if needs_board and t.0 == 0 %}
       <button type="button" class="btn btn-primary">
+    {% elif needs_board and t.0 == 1 %}
+      <button type="button" class="btn btn-outline-success" disabled>
+    {% elif needs_board and t.0 == 2 %}
+      <button type="button" class="btn btn-outline-danger" disabled>
     {% endif %}
-      {% if t.0 == 0 %}
         {% for tok in t.1%}
           {% if forloop.counter0|divisibleby:3 %}
           <div class="row">
           {% endif %}
             <div class="col-4">
-            {% if not needs_board %}
+            {% if not needs_board and forloop.parentloop.counter0 == enabled_little_board and tok == 0 %}
               <button type="button" class="btn btn-primary">
+            {% elif not needs_board %}
+              {% if tok == 0 %}
+                <button type="button" class="btn btn-outline-primary" disabled>
+              {% elif tok == 1 %}
+                <button type="button" class="btn btn-outline-success" disabled>
+              {% elif tok == 2 %}
+                <button type="button" class="btn btn-outline-danger" disabled>
+              {% endif %}
             {% endif %}
             {{tok|add:0}}
             {% if not needs_board %}
@@ -35,9 +46,6 @@
           </div>
           {% endif %}
         {% endfor %}
-      {% elif t.0 == 1 %}
-      {% elif t.0 == 2%}
-      {% endif %}
     {% if needs_board %}
       </button>
     {% endif %}
