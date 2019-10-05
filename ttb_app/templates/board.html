@@ -4,25 +4,47 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12">
-      <h1>BOOTSTRAPPED</h1>
-      <p>We bootstrapped now yee haw.</p>
+      <h1>Ultimate-Tic-Tac-Toe</h1>
     </div>
   </div>
 </div>
 <div class="container-fluid">
-  {{board}}
-</div>
-<div class="container-fluid">
+{% for t in board %}
+  {% if forloop.counter0|divisibleby:3 %}
   <div class="row">
-    <div class="col-sm">
-      Big Board: {{board}}
+  {% endif %}
+    <div class="col-4">
+    {% if needs_board %}
+      <button type="button" class="btn btn-primary">
+    {% endif %}
+      {% if t.0 == 0 %}
+        {% for tok in t.1%}
+          {% if forloop.counter0|divisibleby:3 %}
+          <div class="row">
+          {% endif %}
+            <div class="col-4">
+            {% if not needs_board %}
+              <button type="button" class="btn btn-primary">
+            {% endif %}
+            {{tok|add:0}}
+            {% if not needs_board %}
+              </button>
+            {% endif %}
+            </div>
+          {% if forloop.counter0|add:1|divisibleby:3 %}
+          </div>
+          {% endif %}
+        {% endfor %}
+      {% elif t.0 == 1 %}
+      {% elif t.0 == 2%}
+      {% endif %}
+    {% if needs_board %}
+      </button>
+    {% endif %}
     </div>
-    <div class="col-md">
-      Lil Board: {{board.little_board_state}}
-    </div>
-    <div class="col-sm">
-      One of three columns
-    </div>
+  {% if forloop.counter0|add:1|divisibleby:3 %}
   </div>
+  {% endif %}
+{% endfor %}
 </div>
 {% endblock %}

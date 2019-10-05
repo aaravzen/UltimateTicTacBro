@@ -57,5 +57,14 @@ class DjangoBoard(models.Model):
         else:
             return Token.NONE
 
+    def get_board_tuples(self):
+        board_tuples = self.get_utt_from_state().get_board_tuples()
+        #ret = []
+        #for x,y in board_tuples:
+        #    t = (self.token_to_char(x), self.deboardify(y))
+        #    ret.append(t)
+        ret = list(board_tuples)
+        return ret
+
     def __repr__(self):
         return repr(self.get_utt_from_state())

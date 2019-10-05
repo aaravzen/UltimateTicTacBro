@@ -32,6 +32,9 @@ class UltimateTicTacToe:
             self.select_board(random.randint(0, 8))
         self.place(random.randint(0, 8))
     
+    def get_board_tuples(self):
+        return zip(self.big_board, self.little_boards)
+    
     def game_over(self):
         return self.winner != Token.NONE
     
